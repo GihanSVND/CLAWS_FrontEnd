@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyC3z784w6gT3lRHnT1ev9cQdj5aMPvqZSY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>56106555422</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>GHN.CLAWS</string>
+	<key>PROJECT_ID</key>
+	<string>claws-423416</string>
+	<key>STORAGE_BUCKET</key>
+	<string>claws-423416.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:56106555422:ios:0eb85a85dc17d5a2db760f</string>
+</dict>
+</plist>
