@@ -119,9 +119,12 @@ struct Home: View {
                                 Text("06.32 PM")
                                 HStack{
                                     if viewModel.object != nil {
-                                        Text(viewModel.object!.animal)
-                                            .foregroundColor(Color.green)
-                                            
+                                        if viewModel.object!.animal != "none"{
+                                            Text(viewModel.object!.animal)
+                                                .foregroundColor(Color.green)
+                                                
+                                        }
+                                        
                                     }
                                 }
                                 
@@ -129,11 +132,14 @@ struct Home: View {
                             
                             Spacer()
                             if viewModel.object != nil{
-                                Image(uiImage: convertImage(base64img: viewModel.object!.image))
-                                    .resizable()
-                                    .frame(width: 150.0, height: 150.0)
-                                    .cornerRadius(10)
-                                    
+                                if viewModel.object!.animal != "none" {
+                                    Image(uiImage: convertImage(base64img: viewModel.object!.image))
+                                        .resizable()
+                                        .frame(width: 150.0, height: 150.0)
+                                        .cornerRadius(10)
+                                        
+                                }
+                                
                             }
                         }
                         
@@ -165,8 +171,13 @@ struct Home: View {
                             
                             Spacer()
                             
-                            Image("Elephant")
-                                .cornerRadius(10)
+                            if viewModel.object != nil{
+                                Image(uiImage: convertImage(base64img: viewModel.object!.image))
+                                    .resizable()
+                                    .frame(width: 150.0, height: 150.0)
+                                    .cornerRadius(10)
+                                    
+                            }
                             
                         }
                         
