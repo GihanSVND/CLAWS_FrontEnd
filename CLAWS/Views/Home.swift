@@ -59,6 +59,9 @@ func RequestUpdate(withId id: String){
 
 struct Home: View {
     
+    @State var toggle: Bool = false
+
+    
     @StateObject
     var viewModel = ReadViewModel()
     
@@ -97,14 +100,19 @@ struct Home: View {
 
                         
                         Spacer()
-                        Text("Ongoing Action")
-                            .fontWeight(.bold)
-                            .foregroundColor(Color.black)
                         
-                        Image(systemName: "lightbulb.circle.fill")
-                            .resizable()
-                            .foregroundColor(Color.green)
-                            .frame(width: 25.0, height: 25.0)
+                        if viewModel.object != nil{
+                            HStack{
+                                Text(viewModel.object!.animal != "none" && toggle == true ? "Ongoing Action" : "No Action")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(Color.black)
+                                Image(systemName:viewModel.object!.animal != "none" && toggle == true ? "lightbulb.circle.fill" : "lightbulb.circle")
+                                    .resizable()
+                                    .foregroundColor(viewModel.object!.animal != "none" && toggle == true ? Color.green : Color.red)
+                                    .frame(width: 25.0, height: 25.0)
+                            }
+                        }
+            
                         
                     }.padding()
                     
@@ -119,11 +127,11 @@ struct Home: View {
                                 Text("06.32 PM")
                                 HStack{
                                     if viewModel.object != nil {
-                                        if viewModel.object!.animal != "none"{
-                                            Text(viewModel.object!.animal)
-                                                .foregroundColor(Color.green)
-                                                
-                                        }
+                                        Text(viewModel.object!.animal)
+                                            .font(.title)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(Color.green)
+                                        
                                         
                                     }
                                 }
@@ -132,13 +140,10 @@ struct Home: View {
                             
                             Spacer()
                             if viewModel.object != nil{
-                                if viewModel.object!.animal != "none" {
-                                    Image(uiImage: convertImage(base64img: viewModel.object!.image))
-                                        .resizable()
-                                        .frame(width: 150.0, height: 150.0)
-                                        .cornerRadius(10)
-                                        
-                                }
+                                Image(uiImage: convertImage(base64img: viewModel.object!.image))
+                                    .resizable()
+                                    .frame(width: 150.0, height: 150.0)
+                                    .cornerRadius(10)
                                 
                             }
                         }
@@ -149,43 +154,20 @@ struct Home: View {
                     .cornerRadius(17)
                     .padding()
                     
-                    //Last update widget
-                    VStack(alignment: .leading) {
-                        Text("Last Update")
-                            .font(.title)
-                            .foregroundColor(Color.black)
-                        
-                        HStack{
-                            VStack(alignment: .leading, spacing: 7.0){
-                                Text("2024/05/10")
-                                    .foregroundColor(Color.black)
-                                Text("06.32 PM")
-                                    .foregroundColor(Color.black)
-                                Button("Request Update") {
-                                    RequestUpdate(withId: "update")
-                                }
-                                .buttonStyle(.borderedProminent)
-                                .tint(.black)
-                                
-                            }
+                    
+                    Button{
+                        RequestUpdate(withId: "update")
+                    } label: {
+                        Text("Request Update")
+                            .fontWeight(.bold)
+                            .padding()
+                            .padding(.horizontal, 97.0)
+                            .foregroundColor(.black)
+                            .background(Rectangle().foregroundColor(Color(hue: 1.0, saturation: 0.0, brightness: 0.865)))
+                            .cornerRadius(17)
                             
-                            Spacer()
-                            
-                            if viewModel.object != nil{
-                                Image(uiImage: convertImage(base64img: viewModel.object!.image))
-                                    .resizable()
-                                    .frame(width: 150.0, height: 150.0)
-                                    .cornerRadius(10)
-                                    
-                            }
-                            
-                        }
-                        
-                    }
-                    .padding(30)
-                    .background(Rectangle().foregroundColor(Color(hue: 1.0, saturation: 0.0, brightness: 0.865)))
-                    .cornerRadius(17)
-                    .padding()
+                    }.padding()
+                    
                     
                     HStack{
                         VStack(alignment: .leading){
@@ -197,11 +179,8 @@ struct Home: View {
                         }.foregroundColor(.white)
                         
                         Spacer()
-                        
-                        Toggle(isOn: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Is On@*/.constant(true)/*@END_MENU_TOKEN@*/) {
-                            
-                        }
-                        
+                        Toggle(isOn: $toggle){}
+                
                     }
                     .padding(30)
                     .background(Rectangle())
@@ -209,104 +188,105 @@ struct Home: View {
                     .cornerRadius(17)
                     .padding()
                     
-                    HStack{
-                        
-                        VStack(alignment: .leading){
+                    if (toggle){
+                        HStack{
                             
-                            Text("Change")
-                                .font(.title2)
-                            Text("the")
-                                .font(.title2)
-                            Text("Action")
-                                .font(.title)
-                                .fontWeight(.bold)
-                        }.foregroundColor(.black)
-                        
-                        Spacer()
-                        
-                        VStack(alignment: .trailing){
-                            Button(action: {
-                                RequestUpdate(withId: "Elephant")
-                                        }) {
-                                            HStack{
-                                                Text("Elephant")
-                                                    .foregroundColor(Color.black)
-                                                
-                                                Image("Ele")
-                                                    .resizable()
-                                                    .frame(width: 65.0, height: 65.0)
-                                                
-                                                Image(systemName: "lightbulb.circle")
-                                                    .resizable()
-                                                    .foregroundColor(Color.red)
-                                                    .frame(width: 25.0, height: 25.0)
-                                            }
-                                        }
-                            Button(action: {
-                                RequestUpdate(withId: "WildBoar")
-                                        }) {
-                                            HStack{
-                                                Text("Wild-Boar")
-                                                    .foregroundColor(Color.black)
-                                                
-                                                Image("Wildboar")
-                                                    .resizable()
-                                                    .frame(width: 65.0, height: 65.0)
-                                                
-                                                Image(systemName: "lightbulb.circle")
-                                                    .resizable()
-                                                    .foregroundColor(Color.red)
-                                                    .frame(width: 25.0, height: 25.0)
-                                            }
-                                        }
-                            Button(action: {
-                                RequestUpdate(withId: "Peacock")
-                                        }) {
-                                            HStack{
-                                                Text("Peacock")
-                                                    .foregroundColor(Color.black)
-                                                
-                                                Image("Peacock")
-                                                    .resizable()
-                                                    .frame(width: 65.0, height: 65.0)
-                                                
-                                                Image(systemName: "lightbulb.circle")
-                                                    .resizable()
-                                                    .foregroundColor(Color.red)
-                                                    .frame(width: 25.0, height: 25.0)
-                                            }
-                                        }
+                            VStack(alignment: .leading){
+                                
+                                Text("Change")
+                                    .font(.title2)
+                                Text("the")
+                                    .font(.title2)
+                                Text("Action")
+                                    .font(.title)
+                                    .fontWeight(.bold)
+                            }.foregroundColor(.black)
                             
-                            Button(action: {
-                                RequestUpdate(withId: "Common")
-                                        }) {
-                                            HStack{
-                                                Text("Common")
-                                                    .foregroundColor(Color.black)
-                                                
-                                                Image("Common")
-                                                    .resizable()
-                                                    .frame(width: 65.0, height: 65.0)
-                                                
-                                                Image(systemName: "lightbulb.circle")
-                                                    .resizable()
-                                                    .foregroundColor(Color.red)
-                                                    .frame(width: 25.0, height: 25.0)
-                                            }
-                                        }
+                            Spacer()
                             
-                            
-                            
-                        }
-                    }.padding(30)
-                        .background(Rectangle().foregroundColor(Color(hue: 1.0, saturation: 0.0, brightness: 0.865)))
-                        .cornerRadius(17)
-                        .padding()
-                        .onAppear {
-                                    viewModel.readObject()
-                            
+                            VStack(alignment: .trailing){
+                                Button(action: {
+                                    RequestUpdate(withId: "Elephant")
+                                }) {
+                                    HStack{
+                                        Text("Elephant")
+                                            .foregroundColor(Color.black)
+                                        
+                                        Image("Ele")
+                                            .resizable()
+                                            .frame(width: 65.0, height: 65.0)
+                                        
+                                        Image(systemName: "lightbulb.circle")
+                                            .resizable()
+                                            .foregroundColor(Color.red)
+                                            .frame(width: 25.0, height: 25.0)
+                                    }
                                 }
+                                Button(action: {
+                                    RequestUpdate(withId: "WildBoar")
+                                }) {
+                                    HStack{
+                                        Text("Wild-Boar")
+                                            .foregroundColor(Color.black)
+                                        
+                                        Image("Wildboar")
+                                            .resizable()
+                                            .frame(width: 65.0, height: 65.0)
+                                        
+                                        Image(systemName: "lightbulb.circle")
+                                            .resizable()
+                                            .foregroundColor(Color.red)
+                                            .frame(width: 25.0, height: 25.0)
+                                    }
+                                }
+                                Button(action: {
+                                    RequestUpdate(withId: "Peacock")
+                                }) {
+                                    HStack{
+                                        Text("Peacock")
+                                            .foregroundColor(Color.black)
+                                        
+                                        Image("Peacock")
+                                            .resizable()
+                                            .frame(width: 65.0, height: 65.0)
+                                        
+                                        Image(systemName: "lightbulb.circle")
+                                            .resizable()
+                                            .foregroundColor(Color.red)
+                                            .frame(width: 25.0, height: 25.0)
+                                    }
+                                }
+                                
+                                Button(action: {
+                                    RequestUpdate(withId: "Common")
+                                }) {
+                                    HStack{
+                                        Text("Common")
+                                            .foregroundColor(Color.black)
+                                        
+                                        Image("Common")
+                                            .resizable()
+                                            .frame(width: 65.0, height: 65.0)
+                                        
+                                        Image(systemName: "lightbulb.circle")
+                                            .resizable()
+                                            .foregroundColor(Color.red)
+                                            .frame(width: 25.0, height: 25.0)
+                                    }
+                                }
+                                
+                                
+                                
+                            }
+                        }.padding(30)
+                            .background(Rectangle().foregroundColor(Color(hue: 1.0, saturation: 0.0, brightness: 0.865)))
+                            .cornerRadius(17)
+                            .padding()
+                            
+                    }
                 }
+            }.onAppear {
+                viewModel.readObject()
             }
             
             
