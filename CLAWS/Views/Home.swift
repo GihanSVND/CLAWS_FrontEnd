@@ -12,6 +12,13 @@ struct Response: Codable{
     var id:String
 }
 
+func convertImage(base64img : String) -> UIImage{
+    let imageData = Data(base64Encoded: base64img)
+    let image = UIImage(data: imageData!)
+    
+    return image!
+}
+
 func RequestUpdate(withId id: String){
     
     guard let url = URL(string: "https://0e343f79-2075-47d9-a6f8-eb71a020257a.mock.pstmn.io/success") else { return }
@@ -51,6 +58,9 @@ func RequestUpdate(withId id: String){
     }
 
 struct Home: View {
+    
+    @StateObject
+    var viewModel = ReadViewModel()
     
     @AppStorage("uId") var userID: String = ""
     var body: some View {
@@ -107,14 +117,24 @@ struct Home: View {
                             VStack(alignment: .leading, spacing: 7.0){
                                 Text("2024/05/10")
                                 Text("06.32 PM")
-                                Text("Elephant")
+                                HStack{
+                                    if viewModel.object != nil {
+                                        Text(viewModel.object!.animal)
+                                            .foregroundColor(Color.green)
+                                            
+                                    }
+                                }
+                                
                             }.foregroundColor(Color.white)
                             
                             Spacer()
-                            
-                            Image("Elephant")
-                                .cornerRadius(10)
-                            
+                            if viewModel.object != nil{
+                                Image(uiImage: convertImage(base64img: viewModel.object!.image))
+                                    .resizable()
+                                    .frame(width: 150.0, height: 150.0)
+                                    .cornerRadius(10)
+                                    
+                            }
                         }
                         
                     }
@@ -271,6 +291,10 @@ struct Home: View {
                         .background(Rectangle().foregroundColor(Color(hue: 1.0, saturation: 0.0, brightness: 0.865)))
                         .cornerRadius(17)
                         .padding()
+                        .onAppear {
+                                    viewModel.readObject()
+                            
+                                }
                 }
             }
             
