@@ -103,7 +103,7 @@ struct Home: View {
                         
                         if viewModel.object != nil{
                             HStack{
-                                Text(viewModel.object!.animal != "none" && toggle == true ? "Ongoing Action" : "No Action")
+                                Text(toggle == true ? "Ongoing Action" : "No Action")
                                     .fontWeight(.bold)
                                     .foregroundColor(Color.black)
                                 Image(systemName:viewModel.object!.animal != "none" && toggle == true ? "lightbulb.circle.fill" : "lightbulb.circle")
@@ -179,7 +179,18 @@ struct Home: View {
                         }.foregroundColor(.white)
                         
                         Spacer()
-                        Toggle(isOn: $toggle){}
+                        if viewModel.object != nil{
+                            Toggle(isOn: $toggle){}
+                                .onChange(of: viewModel.object!.animal) {
+                                    if viewModel.object!.animal == "none"{
+                                        toggle = false
+                                    } else{
+                                        toggle = true
+                                    }
+                                }
+                                
+                        }
+                        
                 
                     }
                     .padding(30)
@@ -287,9 +298,8 @@ struct Home: View {
                 }
             }.onAppear {
                 viewModel.readObject()
+            
             }
-            
-            
         }
     }
 }
