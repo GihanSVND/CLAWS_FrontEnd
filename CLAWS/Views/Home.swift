@@ -60,6 +60,10 @@ func RequestUpdate(withId id: String){
 struct Home: View {
     
     @State var toggle: Bool = false
+    @State var elephant: Bool = false
+    @State var wildboar: Bool = false
+    @State var peacock: Bool = false
+    @State var common: Bool = false
 
     
     @StateObject
@@ -106,9 +110,9 @@ struct Home: View {
                                 Text(toggle == true ? "Ongoing Action" : "No Action")
                                     .fontWeight(.bold)
                                     .foregroundColor(Color.black)
-                                Image(systemName:viewModel.object!.animal != "none" && toggle == true ? "lightbulb.circle.fill" : "lightbulb.circle")
+                                Image(systemName:toggle == true ? "lightbulb.circle.fill" : "lightbulb.circle")
                                     .resizable()
-                                    .foregroundColor(viewModel.object!.animal != "none" && toggle == true ? Color.green : Color.red)
+                                    .foregroundColor(toggle == true ? Color.green : Color.red)
                                     .frame(width: 25.0, height: 25.0)
                             }
                         }
@@ -180,7 +184,9 @@ struct Home: View {
                         
                         Spacer()
                         if viewModel.object != nil{
-                            Toggle(isOn: $toggle){}
+                            Toggle(isOn: $toggle){
+                                
+                            }
                                 .onChange(of: viewModel.object!.animal) {
                                     if viewModel.object!.animal == "none"{
                                         toggle = false
@@ -215,78 +221,90 @@ struct Home: View {
                             
                             Spacer()
                             
-                            VStack(alignment: .trailing){
-                                Button(action: {
-                                    RequestUpdate(withId: "Elephant")
-                                }) {
-                                    HStack{
-                                        Text("Elephant")
-                                            .foregroundColor(Color.black)
-                                        
-                                        Image("Ele")
-                                            .resizable()
-                                            .frame(width: 65.0, height: 65.0)
-                                        
-                                        Image(systemName: "lightbulb.circle")
-                                            .resizable()
-                                            .foregroundColor(Color.red)
-                                            .frame(width: 25.0, height: 25.0)
-                                    }
-                                }
-                                Button(action: {
-                                    RequestUpdate(withId: "WildBoar")
-                                }) {
-                                    HStack{
-                                        Text("Wild-Boar")
-                                            .foregroundColor(Color.black)
-                                        
-                                        Image("Wildboar")
-                                            .resizable()
-                                            .frame(width: 65.0, height: 65.0)
-                                        
-                                        Image(systemName: "lightbulb.circle")
-                                            .resizable()
-                                            .foregroundColor(Color.red)
-                                            .frame(width: 25.0, height: 25.0)
-                                    }
-                                }
-                                Button(action: {
-                                    RequestUpdate(withId: "Peacock")
-                                }) {
-                                    HStack{
-                                        Text("Peacock")
-                                            .foregroundColor(Color.black)
-                                        
-                                        Image("Peacock")
-                                            .resizable()
-                                            .frame(width: 65.0, height: 65.0)
-                                        
-                                        Image(systemName: "lightbulb.circle")
-                                            .resizable()
-                                            .foregroundColor(Color.red)
-                                            .frame(width: 25.0, height: 25.0)
-                                    }
-                                }
-                                
-                                Button(action: {
-                                    RequestUpdate(withId: "Common")
-                                }) {
-                                    HStack{
-                                        Text("Common")
-                                            .foregroundColor(Color.black)
-                                        
-                                        Image("Common")
-                                            .resizable()
-                                            .frame(width: 65.0, height: 65.0)
-                                        
-                                        Image(systemName: "lightbulb.circle")
-                                            .resizable()
-                                            .foregroundColor(Color.red)
-                                            .frame(width: 25.0, height: 25.0)
-                                    }
-                                }
+                            VStack(spacing: 10){
                                 
                                 
+                                Toggle(isOn: $elephant, label: {
+                                    HStack(alignment: .center){
+                                        VStack(spacing:2){
+                                            Text("Elephant")
+                                                .foregroundColor(Color.black)
+                                                .multilineTextAlignment(.leading)
+                                            
+                                            Image("Ele")
+                                                .resizable()
+                                                .frame(width: 65.0, height: 65.0)
+                                        }
+                                    }
+                                }).toggleStyle(.button)
+                                    .onChange(of: elephant){
+                                        if elephant == true{
+                                            RequestUpdate(withId: "elephant")
+                                        }
+                                    }
+                                    .tint(.green)
+                                
+                                
+                                Toggle(isOn: $wildboar, label: {
+                                    HStack(alignment: .center){
+                                        VStack(spacing:2){
+                                            Text("Wild-Boar")
+                                                .foregroundColor(Color.black)
+                                                .multilineTextAlignment(.leading)
+                                            
+                                            Image("Wildboar")
+                                                .resizable()
+                                                .frame(width: 65.0, height: 65.0)
+                                        }
+                                    }
+                                }).toggleStyle(.button)
+                                    .onChange(of: wildboar){
+                                        if wildboar == true{
+                                            RequestUpdate(withId: "wildboar")
+                                        }
+                                    }
+                                    .tint(.green)
+                                
+                                Toggle(isOn: $peacock, label: {
+                                    HStack(alignment: .center){
+                                        VStack(spacing:2){
+                                            Text("Peacock")
+                                                .foregroundColor(Color.black)
+                                                .multilineTextAlignment(.leading)
+                                            
+                                            Image("Peacock")
+                                                .resizable()
+                                                .frame(width: 65.0, height: 65.0)
+                                        }
+                                    }
+                                }).toggleStyle(.button)
+                                    .onChange(of: peacock){
+                                        if peacock == true{
+                                            RequestUpdate(withId: "peacock")
+                                        }
+                                    }
+                                    .tint(.green)
+                                
+                                
+                                Toggle(isOn: $common, label: {
+                                    HStack(alignment: .center){
+                                        VStack(spacing:2){
+                                            Text("Common")
+                                                .foregroundColor(Color.black)
+                                                .multilineTextAlignment(.leading)
+                                            
+                                            Image("Common")
+                                                .resizable()
+                                                .frame(width: 65.0, height: 65.0)
+                                        }
+                                    }
+                                }).toggleStyle(.button)
+                                    .onChange(of: common){
+                                        if common == true{
+                                            RequestUpdate(withId: "common")
+                                        }
+                                    }
+                                    .tint(.green)
                                 
                             }
                         }.padding(30)
