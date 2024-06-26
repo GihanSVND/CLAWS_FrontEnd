@@ -240,6 +240,9 @@ struct Home: View {
                                     .onChange(of: elephant){
                                         if elephant == true{
                                             RequestUpdate(withId: "elephant")
+                                            wildboar = false
+                                            peacock = false
+                                            common = false
                                         }
                                     }
                                     .tint(.green)
@@ -261,6 +264,9 @@ struct Home: View {
                                     .onChange(of: wildboar){
                                         if wildboar == true{
                                             RequestUpdate(withId: "wildboar")
+                                            elephant = false
+                                            peacock = false
+                                            common = false
                                         }
                                     }
                                     .tint(.green)
@@ -281,6 +287,9 @@ struct Home: View {
                                     .onChange(of: peacock){
                                         if peacock == true{
                                             RequestUpdate(withId: "peacock")
+                                            elephant = false
+                                            wildboar = false
+                                            common = false
                                         }
                                     }
                                     .tint(.green)
@@ -302,6 +311,9 @@ struct Home: View {
                                     .onChange(of: common){
                                         if common == true{
                                             RequestUpdate(withId: "common")
+                                            elephant = false
+                                            wildboar = false
+                                            peacock = false
                                         }
                                     }
                                     .tint(.green)
