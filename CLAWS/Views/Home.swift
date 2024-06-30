@@ -19,9 +19,9 @@ func convertImage(base64img : String) -> UIImage{
     return image!
 }
 
-func RequestUpdate(withId id: String){
+func RequestUpdate(withId id: String, withID endPoint: String){
     
-    guard let url = URL(string: "https://0e343f79-2075-47d9-a6f8-eb71a020257a.mock.pstmn.io/success") else { return }
+    guard let url = URL(string: endPoint) else { return }
     
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
@@ -64,10 +64,12 @@ struct Home: View {
     @State var wildboar: Bool = false
     @State var peacock: Bool = false
     @State var common: Bool = false
-
+    
     
     @StateObject
     var viewModel = ReadViewModel()
+    
+    @State var lastUpdate: Date? = nil
     
     @AppStorage("uId") var userID: String = ""
     var body: some View {
@@ -121,22 +123,25 @@ struct Home: View {
                     }.padding()
                     
                     VStack(alignment: .leading) {
-                        Text("Last Detection")
+                        Text("Last Update")
                             .font(.title)
                             .foregroundColor(Color.white)
                         
                         HStack{
                             VStack(alignment: .leading, spacing: 7.0){
-                                Text("2024/05/10")
-                                Text("06.32 PM")
+                                if viewModel.object != nil{
+                                    Text(viewModel.object!.date)
+                                }
+                                if viewModel.object != nil{
+                                    Text(viewModel.object!.time)
+                                }
                                 HStack{
                                     if viewModel.object != nil {
                                         Text(viewModel.object!.animal)
                                             .font(.title)
                                             .fontWeight(.bold)
                                             .foregroundColor(Color.green)
-                                        
-                                        
+
                                     }
                                 }
                                 
@@ -150,6 +155,13 @@ struct Home: View {
                                     .cornerRadius(10)
                                 
                             }
+                            
+                        }
+                        var dateFormatter: DateFormatter{
+                            let formatter = DateFormatter()
+                            formatter.dateStyle = .short
+                            formatter.timeStyle = .short
+                            return formatter
                         }
                         
                     }
@@ -160,7 +172,7 @@ struct Home: View {
                     
                     
                     Button{
-                        RequestUpdate(withId: "update")
+                        RequestUpdate(withId: "update", withID: "https://0e343f79-2075-47d9-a6f8-eb71a020257a.mock.pstmn.io/success")
                     } label: {
                         Text("Request Update")
                             .fontWeight(.bold)
@@ -239,7 +251,7 @@ struct Home: View {
                                 }).toggleStyle(.button)
                                     .onChange(of: elephant){
                                         if elephant == true{
-                                            RequestUpdate(withId: "elephant")
+                                            RequestUpdate(withId: "elephant",withID: "https://0e343f79-2075-47d9-a6f8-eb71a020257a.mock.pstmn.io/success")
                                             wildboar = false
                                             peacock = false
                                             common = false
@@ -263,7 +275,7 @@ struct Home: View {
                                 }).toggleStyle(.button)
                                     .onChange(of: wildboar){
                                         if wildboar == true{
-                                            RequestUpdate(withId: "wildboar")
+                                            RequestUpdate(withId: "wildboar",withID: "https://0e343f79-2075-47d9-a6f8-eb71a020257a.mock.pstmn.io/success")
                                             elephant = false
                                             peacock = false
                                             common = false
@@ -286,7 +298,7 @@ struct Home: View {
                                 }).toggleStyle(.button)
                                     .onChange(of: peacock){
                                         if peacock == true{
-                                            RequestUpdate(withId: "peacock")
+                                            RequestUpdate(withId: "peacock",withID: "https://0e343f79-2075-47d9-a6f8-eb71a020257a.mock.pstmn.io/success")
                                             elephant = false
                                             wildboar = false
                                             common = false
@@ -310,7 +322,7 @@ struct Home: View {
                                 }).toggleStyle(.button)
                                     .onChange(of: common){
                                         if common == true{
-                                            RequestUpdate(withId: "common")
+                                            RequestUpdate(withId: "common",withID: "https://0e343f79-2075-47d9-a6f8-eb71a020257a.mock.pstmn.io/success")
                                             elephant = false
                                             wildboar = false
                                             peacock = false

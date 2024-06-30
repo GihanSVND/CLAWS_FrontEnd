@@ -11,6 +11,8 @@ import UIKit
 class objectanimal: Encodable,Decodable{
     var animal: String = ""
     var image : String = ""
+    var time : String = ""
+    var date : String = ""
 }
 
 extension Encodable{
