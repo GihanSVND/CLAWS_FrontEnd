@@ -22,13 +22,19 @@ struct Login: View {
             Color(.white)
                 .ignoresSafeArea()
             
-            Image("farm")
-                .resizable()
-                .ignoresSafeArea()
+            VStack(spacing: 300){
+                Image("CLAWS")
+                    .resizable()
+                    .frame(width: 120.0, height: 120.0)
+                    .offset(y: 25)
+                Image("loging_back")
+                    .resizable()
+                    .frame(width: 350, height: 350)
+                    .offset(y: 135)
+                    .ignoresSafeArea()
+                    
+            }
             
-            Color(.white)
-                .ignoresSafeArea()
-                .opacity(0.6)
             
             VStack(spacing:30){
                 
@@ -41,7 +47,7 @@ struct Login: View {
                 HStack{
                     Image(systemName: "person.fill")
                     
-                    TextField("Email", text: $email)
+                    TextField("", text: $email)
                         .foregroundColor(.black)
                         .textFieldStyle(.plain)
                         .placeholder(when: email.isEmpty){
@@ -66,7 +72,7 @@ struct Login: View {
                 HStack{
                     Image(systemName: "lock.fill")
                     
-                    SecureField("Password", text: $password)
+                    SecureField("", text: $password)
                         .foregroundColor(.black)
                         .textFieldStyle(.plain)
                         .placeholder(when: password.isEmpty){
