@@ -14,6 +14,7 @@ struct Signup: View {
     
     @State private var email: String = ""
     @State private var password: String = ""
+    @State private var checkPassword: String = ""
     @AppStorage("uId") var userID: String = ""
     
     var body: some View {
@@ -35,13 +36,14 @@ struct Signup: View {
                     
             }
             
-            VStack(spacing:30){
+            VStack(spacing: 15){
                 
                 Text("Create an Account!")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .padding(0.0)
-                    .offset(y:-50)
+                    .offset(y: -15)
+                    
                     
                 HStack{
                     Image(systemName: "person.fill")
@@ -55,11 +57,7 @@ struct Signup: View {
                                 .bold()
                         }
                     Spacer()
-                    if(email.count != 0){
-                        Image(systemName: email.isValidEmail() ? "checkmark" : "xmark")
-                            .fontWeight(.bold)
-                            .foregroundColor(email.isValidEmail() ? .green : .red)
-                    }
+                    
                     
                 }.padding()
                     .overlay(RoundedRectangle(cornerRadius: 16)
@@ -81,7 +79,7 @@ struct Signup: View {
                         }
                     Spacer()
                     if(password.count != 0){
-                        Image(systemName: password.isValidPssword(password) ? "checkmark" : "xmark")
+                        Text(password.isValidPssword(password) ? "Strong" : "Weak")
                             .fontWeight(.bold)
                             .foregroundColor(password.isValidPssword(password) ? .green : .red)
                     }
@@ -90,6 +88,26 @@ struct Signup: View {
                 }.padding()
                     .overlay(RoundedRectangle(cornerRadius: 16)
                         .stroke(lineWidth: 2))
+                
+                HStack{
+                    Image(systemName: "lock.fill")
+                    
+                    SecureField("", text: $checkPassword)
+                        .foregroundColor(.black)
+                        .textFieldStyle(.plain)
+                        .placeholder(when: checkPassword.isEmpty){
+                            Text("Confirm Password")
+                                .foregroundColor(.black)
+                                .bold()
+                        }
+                    Spacer()
+                    Text(password != checkPassword && checkPassword != "" ? "Incorrect" : "")
+                        .fontWeight(.bold)
+                        .foregroundColor(password != checkPassword && checkPassword != "" ? .red : .green)
+                }.padding()
+                    .overlay(RoundedRectangle(cornerRadius: 16)
+                        .stroke(lineWidth: 2))
+                
                 
                 
                 Button{
@@ -116,7 +134,7 @@ struct Signup: View {
                 }.offset(y:40)
                 
                 Button{
-                    withAnimation{
+                    withAnimation(Animation.bouncy){
                         self.currentView = "login"
                     }
                 } label: {

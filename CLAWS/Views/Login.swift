@@ -42,7 +42,7 @@ struct Login: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .padding(0.0)
-                    .offset(y:-50)
+                    
                     
                 HStack{
                     Image(systemName: "person.fill")
@@ -56,11 +56,7 @@ struct Login: View {
                                 .bold()
                         }
                     Spacer()
-                    if(email.count != 0){
-                        Image(systemName: email.isValidEmail() ? "checkmark" : "xmark")
-                            .fontWeight(.bold)
-                            .foregroundColor(email.isValidEmail() ? .green : .red)
-                    }
+                    
                     
                 }.padding()
                     .overlay(RoundedRectangle(cornerRadius: 16)
@@ -81,11 +77,7 @@ struct Login: View {
                                 .bold()
                         }
                     Spacer()
-                    if(password.count != 0){
-                        Image(systemName: password.isValidPssword(password) ? "checkmark" : "xmark")
-                            .fontWeight(.bold)
-                            .foregroundColor(password.isValidPssword(password) ? .green : .red)
-                    }
+                    
                     
                 
                 }.padding()
@@ -120,7 +112,7 @@ struct Login: View {
                 
                 
                 Button{
-                    withAnimation{
+                    withAnimation(Animation.bouncy){
                         self.currentView = "signup"
                     }
                 } label: {
