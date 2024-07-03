@@ -91,6 +91,7 @@ struct Signup: View {
                     .overlay(RoundedRectangle(cornerRadius: 16)
                         .stroke(lineWidth: 2))
                 
+                
                 Button{
                     Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                         if let error = error{
@@ -119,7 +120,7 @@ struct Signup: View {
                         self.currentView = "login"
                     }
                 } label: {
-                    Text("Already have an account? Register")
+                    Text("Already have an account? Login")
                         .foregroundColor(.black)
                         .bold()
                         
