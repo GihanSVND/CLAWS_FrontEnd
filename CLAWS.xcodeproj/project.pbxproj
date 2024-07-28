@@ -14,6 +14,10 @@
 		E20C141D2C23F3E700C4D021 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E20C141C2C23F3E700C4D021 /* FirebaseFirestore */; };
 		E20C141F2C23F47D00C4D021 /* Signup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20C141E2C23F47D00C4D021 /* Signup.swift */; };
 		E20C14212C23F4EE00C4D021 /* Authview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20C14202C23F4EE00C4D021 /* Authview.swift */; };
+		E2101CBD2C561E9D00C2F60A /* Guid01.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2101CBC2C561E9D00C2F60A /* Guid01.swift */; };
+		E225C9212C56C712000CFEB8 /* Guid02.swift in Sources */ = {isa = PBXBuildFile; fileRef = E225C9202C56C712000CFEB8 /* Guid02.swift */; };
+		E225C9232C56C9F3000CFEB8 /* Guid03.swift in Sources */ = {isa = PBXBuildFile; fileRef = E225C9222C56C9F3000CFEB8 /* Guid03.swift */; };
+		E225C9252C56CC91000CFEB8 /* Guid04.swift in Sources */ = {isa = PBXBuildFile; fileRef = E225C9242C56CC91000CFEB8 /* Guid04.swift */; };
 		E25175E12C1F38EB00338E8A /* CLAWSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25175E02C1F38EB00338E8A /* CLAWSApp.swift */; };
 		E25175E32C1F38EB00338E8A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25175E22C1F38EB00338E8A /* ContentView.swift */; };
 		E25175E52C1F38EB00338E8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E25175E42C1F38EB00338E8A /* Assets.xcassets */; };
@@ -48,6 +52,10 @@
 		E20C14132C23F13700C4D021 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		E20C141E2C23F47D00C4D021 /* Signup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup.swift; sourceTree = "<group>"; };
 		E20C14202C23F4EE00C4D021 /* Authview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authview.swift; sourceTree = "<group>"; };
+		E2101CBC2C561E9D00C2F60A /* Guid01.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guid01.swift; sourceTree = "<group>"; };
+		E225C9202C56C712000CFEB8 /* Guid02.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guid02.swift; sourceTree = "<group>"; };
+		E225C9222C56C9F3000CFEB8 /* Guid03.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guid03.swift; sourceTree = "<group>"; };
+		E225C9242C56CC91000CFEB8 /* Guid04.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guid04.swift; sourceTree = "<group>"; };
 		E25175DD2C1F38EB00338E8A /* CLAWS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLAWS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E25175E02C1F38EB00338E8A /* CLAWSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLAWSApp.swift; sourceTree = "<group>"; };
 		E25175E22C1F38EB00338E8A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -100,6 +108,10 @@
 				E20C14202C23F4EE00C4D021 /* Authview.swift */,
 				E2A42AD92C258DA300E01713 /* ReadViewModel.swift */,
 				E2A42ADB2C25952B00E01713 /* ObjectModel.swift */,
+				E2101CBC2C561E9D00C2F60A /* Guid01.swift */,
+				E225C9202C56C712000CFEB8 /* Guid02.swift */,
+				E225C9222C56C9F3000CFEB8 /* Guid03.swift */,
+				E225C9242C56CC91000CFEB8 /* Guid04.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -303,12 +315,16 @@
 			files = (
 				E25175E32C1F38EB00338E8A /* ContentView.swift in Sources */,
 				E20C141F2C23F47D00C4D021 /* Signup.swift in Sources */,
+				E225C9232C56C9F3000CFEB8 /* Guid03.swift in Sources */,
+				E225C9212C56C712000CFEB8 /* Guid02.swift in Sources */,
 				E20C140E2C23EB6D00C4D021 /* Home.swift in Sources */,
 				E25175E12C1F38EB00338E8A /* CLAWSApp.swift in Sources */,
 				E2A42ADC2C25952B00E01713 /* ObjectModel.swift in Sources */,
 				E2A42ADA2C258DA300E01713 /* ReadViewModel.swift in Sources */,
+				E225C9252C56CC91000CFEB8 /* Guid04.swift in Sources */,
 				E20C14212C23F4EE00C4D021 /* Authview.swift in Sources */,
 				E20C14142C23F13700C4D021 /* Login.swift in Sources */,
+				E2101CBD2C561E9D00C2F60A /* Guid01.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

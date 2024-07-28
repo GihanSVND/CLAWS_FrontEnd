@@ -103,8 +103,9 @@ struct Home: View {
                                 .resizable()
                                 .frame(width: 65.0, height: 65.0)
                         }
-
                         
+
+                
                         Spacer()
                         
                         if viewModel.object != nil{
