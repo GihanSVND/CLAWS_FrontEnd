@@ -15,6 +15,8 @@ struct Login: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @AppStorage("uId") var userID: String = ""
+    @State private var showAlert: Bool = false
+    @State private var alertMessage: String = ""
     
     var body: some View {
         
@@ -87,8 +89,10 @@ struct Login: View {
                 Button{
                     
                     Auth.auth().signIn(withEmail: email, password: password) {authResult, error in
-                      
+                        
                         if let error = error{
+                            
+                            showAlert = true
                             print(error)
                             return
                         }
@@ -99,7 +103,7 @@ struct Login: View {
                                 userID = authResult.user.uid
                             }
                         }
-                      
+                        
                     }
                 } label: {
                     Text("Login")
@@ -109,6 +113,9 @@ struct Login: View {
                         .foregroundColor(.white)
                         .cornerRadius(16)
                 }.offset(y:40)
+                    .alert(isPresented: $showAlert) {
+                        Alert(title: Text("Login Error"), message: Text("Invalid Username or Password"), dismissButton: .default(Text("OK")))
+                    }
                 
                 
                 Button{
