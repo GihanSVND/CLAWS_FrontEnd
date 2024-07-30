@@ -342,7 +342,7 @@ struct Home: View {
             }.onAppear {
                 viewModel.readObject()
             
-            }
+            }.navigationBarBackButtonHidden(true)
         }
     }
 }
