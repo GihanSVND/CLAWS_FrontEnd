@@ -60,7 +60,7 @@ struct Guid01: View {
                                    label: {
                         Text("Skip")
                             .foregroundColor(.black)
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            .fontWeight(.bold)
                     })
                     
                     Spacer()
@@ -69,7 +69,7 @@ struct Guid01: View {
                         HStack{
                             Text("Next")
                                 .foregroundColor(.white)
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                .fontWeight(.bold)
                             Image(systemName: "arrow.forward")
                                 .foregroundColor(.white)
                                 .fontWeight(.bold)
@@ -84,7 +84,7 @@ struct Guid01: View {
                 .offset(y:330)
             }
         }.accentColor(Color(.label))
-        .navigationBarBackButtonHidden(true)
+            .navigationBarBackButtonHidden(true)
     }
 }
 
