@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct Guid03: View {
+    @State var appeared: Double = 0.0
     var body: some View {
         NavigationView{
             ZStack{
                 Text("ACTIONS")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .offset(y:-310)
+                    .offset(y:-350)
                 VStack(alignment: .center){
                     Spacer()
                         .frame(height: 61.0)
@@ -61,9 +62,8 @@ struct Guid03: View {
                             .foregroundColor(.black)
                             .fontWeight(.bold)
                         Text("Back")
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     })
-                }.offset(x:-150,y:-350)
+                }.offset(x:-160,y:-400)
                 
                 HStack{
                     NavigationLink(destination: Home(),
@@ -92,9 +92,13 @@ struct Guid03: View {
                 .padding()
                 .padding()
                 .offset(y:330)
-            }
+            }.opacity(appeared)
+                .animation(Animation.easeInOut(duration: 2.0), value: appeared)
+                .onAppear {self.appeared = 1.0}
+                .onDisappear {self.appeared = 0.0}
         }.accentColor(Color(.label))
         .navigationBarBackButtonHidden(true)
+        .transition(.identity)
     }
 }
 

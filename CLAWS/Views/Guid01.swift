@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct Guid01: View {
+    @State var appeared: Double = 0.0
     
     var body: some View {
         NavigationView{
@@ -15,7 +16,7 @@ struct Guid01: View {
                 Text("CLAWS")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .offset(y:-310)
+                    .offset(y:-350)
                 VStack(alignment: .center){
                     Spacer()
                         .frame(height: 61.0)
@@ -83,8 +84,15 @@ struct Guid01: View {
                 .padding()
                 .offset(y:330)
             }
+            .opacity(appeared)
+                .animation(Animation.easeInOut(duration: 2.0), value: appeared)
+                .onAppear {self.appeared = 1.0}
+                .onDisappear {self.appeared = 0.0}
+            
         }.accentColor(Color(.label))
-            .navigationBarBackButtonHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .transition(.identity)
+            
     }
 }
 

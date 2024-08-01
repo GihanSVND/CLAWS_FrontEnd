@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct Guid02: View {
+    @State var appeared: Double = 0.0
     var body: some View {
         NavigationView{
             ZStack{
                 Text("UPDATES")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .offset(y:-310)
+                    .offset(y:-350)
                 VStack(alignment: .center){
                     Spacer()
                         .frame(height: 61.0)
@@ -51,18 +52,19 @@ struct Guid02: View {
                 }.offset(y:270)
                 
                 HStack(spacing: 0.0){
-                    NavigationLink(destination: Guid01(),
+                    NavigationLink(destination: Guid01()
+                        .transition(.identity),
                                    label: {
                         Image(systemName: "chevron.backward")
                             .foregroundColor(.black)
                             .fontWeight(.bold)
                         Text("Back")
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     })
-                }.offset(x:-150,y:-350)
-                                   
+                }.offset(x:-160,y:-400)
+                
                 HStack{
-                    NavigationLink(destination: Home(),
+                    NavigationLink(destination: Home()
+                        .transition(.identity),
                                    label: {
                         Text("Skip")
                             .foregroundColor(.black)
@@ -70,7 +72,8 @@ struct Guid02: View {
                     })
                     Spacer()
                     
-                    NavigationLink(destination: Guid03(),
+                    NavigationLink(destination: Guid03()
+                        .transition(.identity),
                                    label: {
                         HStack{
                             Text("Next")
@@ -89,9 +92,13 @@ struct Guid02: View {
                 .padding()
                 .padding()
                 .offset(y:330)
-            }
+            }.opacity(appeared)
+                .animation(Animation.easeInOut(duration: 2.0), value: appeared)
+                .onAppear {self.appeared = 1.0}
+                .onDisappear {self.appeared = 0.0}
         }.accentColor(Color(.label))
-        .navigationBarBackButtonHidden(true)
+            .navigationBarBackButtonHidden(true)
+            .transition(.identity)
         
     }
 }

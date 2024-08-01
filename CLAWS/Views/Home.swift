@@ -104,8 +104,10 @@ struct Home: View {
                                     .rotationEffect(.degrees(180.0))
                                     .accentColor(.black)
                             })
+                            
                             Spacer()
                                 .frame(width: 31.0)
+                            
                             NavigationLink(destination: Guid01(),
                                            label: {
                                 Image(systemName: "questionmark.circle.fill")
@@ -131,6 +133,11 @@ struct Home: View {
                             
                             
                         }.padding()
+                        
+                        Image("CLAWS")
+                            .resizable()
+                            .frame(width: 75.0, height:75.0)
+                            .offset(y:-10)
                         
                         VStack(alignment: .leading) {
                             Text("Last Update")
