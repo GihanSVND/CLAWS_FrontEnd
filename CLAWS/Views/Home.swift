@@ -189,7 +189,7 @@ struct Home: View {
                         
                         
                         Button{
-                            RequestUpdate(withId: "update", withID: "https://0e343f79-2075-47d9-a6f8-eb71a020257a.mock.pstmn.io/success")
+                            viewModel.updateRequest()
                         } label: {
                             Text("Request Update")
                                 .fontWeight(.bold)
@@ -235,6 +235,7 @@ struct Home: View {
                         .padding()
                         
                         if (toggle){
+                            
                             HStack{
                                 
                                 VStack(alignment: .leading){
@@ -268,7 +269,7 @@ struct Home: View {
                                     }).toggleStyle(.button)
                                         .onChange(of: elephant){
                                             if elephant == true{
-                                                RequestUpdate(withId: "elephant",withID: "https://0e343f79-2075-47d9-a6f8-eb71a020257a.mock.pstmn.io/success")
+                                                viewModel.changeAction(animalChange: "elephant")
                                                 wildboar = false
                                                 peacock = false
                                                 common = false
@@ -292,7 +293,7 @@ struct Home: View {
                                     }).toggleStyle(.button)
                                         .onChange(of: wildboar){
                                             if wildboar == true{
-                                                RequestUpdate(withId: "wildboar",withID: "https://0e343f79-2075-47d9-a6f8-eb71a020257a.mock.pstmn.io/success")
+                                                viewModel.changeAction(animalChange: "wildboar")
                                                 elephant = false
                                                 peacock = false
                                                 common = false
@@ -315,7 +316,7 @@ struct Home: View {
                                     }).toggleStyle(.button)
                                         .onChange(of: peacock){
                                             if peacock == true{
-                                                RequestUpdate(withId: "peacock",withID: "https://0e343f79-2075-47d9-a6f8-eb71a020257a.mock.pstmn.io/success")
+                                                viewModel.changeAction(animalChange: "peacock")
                                                 elephant = false
                                                 wildboar = false
                                                 common = false
@@ -339,7 +340,7 @@ struct Home: View {
                                     }).toggleStyle(.button)
                                         .onChange(of: common){
                                             if common == true{
-                                                RequestUpdate(withId: "common",withID: "https://0e343f79-2075-47d9-a6f8-eb71a020257a.mock.pstmn.io/success")
+                                                viewModel.changeAction(animalChange: "common")
                                                 elephant = false
                                                 wildboar = false
                                                 peacock = false
@@ -353,6 +354,12 @@ struct Home: View {
                                 .cornerRadius(17)
                                 .padding()
                             
+                        }
+                    }.onChange(of: toggle){
+                        if toggle == true{
+                            viewModel.makeActionOnOff(animalChange: "1")
+                        } else if toggle == false {
+                            viewModel.makeActionOnOff(animalChange: "0")
                         }
                     }
                 }.onAppear {

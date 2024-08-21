@@ -41,4 +41,61 @@ class ReadViewModel: ObservableObject{
         }
     }
     
+    func changeAction(animalChange: String) {
+            let updateData: [String: Any] = [
+                "ChangedAnimal": animalChange
+            ]
+            
+            ref.child("RequestUpdate/animalUpdate").setValue(updateData) { error, _ in
+                if let error = error {
+                    print("Data could not be saved: \(error.localizedDescription)")
+                } else {
+                    print("Data saved successfully!")
+                }
+            }
+        }
+    
+    func updateRequest() {
+        let updateReq: [String: Any] = [
+            "Update": "1"
+        ]
+        
+        ref.child("RequestUpdate").setValue(updateReq) { error, _ in
+            if let error = error {
+                print("Data could not be saved: \(error.localizedDescription)")
+            } else {
+                print("Data saved successfully!")
+                
+                // Change to "Update": "2" after 10 seconds
+                DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                    let updateReqAfterDelay: [String: Any] = [
+                        "Update": "0"
+                    ]
+                    
+                    self.ref.child("RequestUpdate").setValue(updateReqAfterDelay) { error, _ in
+                        if let error = error {
+                            print("Data could not be updated to '2': \(error.localizedDescription)")
+                        } else {
+                            print("Data updated to '2' successfully!")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func makeActionOnOff(animalChange: String) {
+            let updateData: [String: Any] = [
+                "Action": animalChange
+            ]
+            
+            ref.child("RequestUpdate").setValue(updateData) { error, _ in
+                if let error = error {
+                    print("Data could not be saved: \(error.localizedDescription)")
+                } else {
+                    print("Data saved successfully!")
+                }
+            }
+        }
+    
 }
