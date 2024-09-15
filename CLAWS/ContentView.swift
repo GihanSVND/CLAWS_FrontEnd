@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-
-
 struct ContentView: View {
     
     @AppStorage("uId") var userID: String = ""
@@ -20,7 +18,6 @@ struct ContentView: View {
         }else{
             Home()
         }
-        
         
     }
 }

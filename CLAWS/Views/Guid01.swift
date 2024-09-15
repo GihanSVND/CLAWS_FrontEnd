@@ -11,7 +11,7 @@ struct Guid01: View {
     @State var appeared: Double = 0.0
     
     var body: some View {
-        NavigationView{
+        
             ZStack{
                 Text("CLAWS")
                     .font(.largeTitle)
@@ -84,14 +84,7 @@ struct Guid01: View {
                 .padding()
                 .offset(y:330)
             }
-            .opacity(appeared)
-                .animation(Animation.easeInOut(duration: 2.0), value: appeared)
-                .onAppear {self.appeared = 1.0}
-                .onDisappear {self.appeared = 0.0}
-            
-        }.accentColor(Color(.label))
-        .navigationBarBackButtonHidden(true)
-        .transition(.identity)
+        
             
     }
 }

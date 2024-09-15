@@ -64,6 +64,7 @@ struct Home: View {
     @State var wildboar: Bool = false
     @State var peacock: Bool = false
     @State var common: Bool = false
+    @State private var showLogoutDialog = false
     
     
     @StateObject
@@ -84,26 +85,31 @@ struct Home: View {
                         
                         HStack{
                             Button(action: {
-                                let firebaseAuth = Auth.auth()
-                                do {
-                                    try firebaseAuth.signOut()
-                                    withAnimation {
-                                        withAnimation {
-                                            userID = ""
-                                        }
-                                    }
-                                    
-                                    
-                                } catch let signOutError as NSError {
-                                    print("Error signing out: %@", signOutError)
-                                }
+                                showLogoutDialog = true
                             }, label: {
                                 Image(systemName: "rectangle.portrait.and.arrow.right.fill")
                                     .resizable()
                                     .frame(width: 25.0, height: 25.0)
                                     .rotationEffect(.degrees(180.0))
                                     .accentColor(.black)
-                            })
+                            }).confirmationDialog("Are you sure you want to log out?", isPresented: $showLogoutDialog, titleVisibility: .visible) {
+                                Button("Log Out", role: .destructive) {
+                                    let firebaseAuth = Auth.auth()
+                                    do {
+                                        try firebaseAuth.signOut()
+                                        withAnimation {
+                                            withAnimation {
+                                                userID = ""
+                                            }
+                                        }
+                                        
+                                        
+                                    } catch let signOutError as NSError {
+                                        print("Error signing out: %@", signOutError)
+                                    }
+                                }
+                                Button("Cancel", role: .cancel) { }
+                            }
                             
                             Spacer()
                                 .frame(width: 31.0)

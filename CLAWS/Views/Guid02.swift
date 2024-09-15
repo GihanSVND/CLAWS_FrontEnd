@@ -10,7 +10,7 @@ import SwiftUI
 struct Guid02: View {
     @State var appeared: Double = 0.0
     var body: some View {
-        NavigationView{
+        
             ZStack{
                 Text("UPDATES")
                     .font(.largeTitle)
@@ -51,16 +51,6 @@ struct Guid02: View {
                         .fontWeight(.bold)
                 }.offset(y:270)
                 
-                HStack(spacing: 0.0){
-                    NavigationLink(destination: Guid01()
-                        .transition(.identity),
-                                   label: {
-                        Image(systemName: "chevron.backward")
-                            .foregroundColor(.black)
-                            .fontWeight(.bold)
-                        Text("Back")
-                    })
-                }.offset(x:-160,y:-400)
                 
                 HStack{
                     NavigationLink(destination: Home()
@@ -92,13 +82,8 @@ struct Guid02: View {
                 .padding()
                 .padding()
                 .offset(y:330)
-            }.opacity(appeared)
-                .animation(Animation.easeInOut(duration: 2.0), value: appeared)
-                .onAppear {self.appeared = 1.0}
-                .onDisappear {self.appeared = 0.0}
-        }.accentColor(Color(.label))
-            .navigationBarBackButtonHidden(true)
-            .transition(.identity)
+            }
+        
         
     }
 }
