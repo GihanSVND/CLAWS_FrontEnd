@@ -65,6 +65,7 @@ struct Home: View {
     @State var peacock: Bool = false
     @State var common: Bool = false
     @State private var showLogoutDialog = false
+    @State private var isImageFullScreen = false
     
     
     @StateObject
@@ -176,6 +177,12 @@ struct Home: View {
                                         .resizable()
                                         .frame(width: 150.0, height: 150.0)
                                         .cornerRadius(10)
+                                        .onTapGesture {
+                                            isImageFullScreen = true
+                                        }
+                                        .sheet(isPresented: $isImageFullScreen) {
+                                            FullScreenImageView(image: convertImage(base64img: viewModel.object!.image))
+                                        }
                                     
                                 }
                                 
@@ -379,4 +386,40 @@ struct Home: View {
 
 #Preview {
     Home()
+}
+
+struct FullScreenImageView: View {
+    let image: UIImage
+    @Environment(\.dismiss) var dismiss
+    @State private var scale: CGFloat = 1.0
+    @State private var lastScale: CGFloat = 1.0
+    
+    var body: some View {
+        ZStack(alignment: .topTrailing) {
+            ScrollView([.horizontal, .vertical], showsIndicators: false) {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFit()
+                    .scaleEffect(scale)
+                    .gesture(
+                        MagnificationGesture()
+                            .onChanged { value in
+                                scale = lastScale * value
+                            }
+                            .onEnded { _ in
+                                lastScale = scale
+                            }
+                    )
+            }
+            .background(Color.white)
+            .edgesIgnoringSafeArea(.all)
+            
+            Button(action: {
+                dismiss()
+            }) {
+                Text("Done")
+                    .padding()
+            }
+        }
+    }
 }
